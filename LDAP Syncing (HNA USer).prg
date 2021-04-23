@@ -1,3 +1,6 @@
+;This query returns all users belonging to WH organisations (FH, SH, WTN, SBRY)
+
+
 SELECT
 	DIRECTORY_IND = E.DIRECTORY_IND
 	,  P.USERNAME 
