@@ -1,11 +1,10 @@
-; active IV orders
 select	; IV set orders	
 	UR_number = ea_URN.alias	
 	, patient_name = p.name_full_formatted  ;"xxxx"	
 	, patient_id = o.person_id	
 	, encntr_dates = concat(format(e_orig.arrive_dt_tm, "dd/mm/yy hh:mm"), " - ", format(e_orig.depart_dt_tm, "dd/mm/yy hh:mm"))	
 	, visit_no = ea_visit.alias	
-	, o.encntr_iD
+	, o.encntr_id	
 	, facility_at_time_of_order = uar_get_code_display(e_orig.loc_facility_cd)	
 	, unit_at_time_of_order = if(elh.loc_nurse_unit_cd > 0) uar_get_code_display(elh.loc_nurse_unit_cd)	
 	else uar_get_code_display(e_orig.loc_nurse_unit_cd)	

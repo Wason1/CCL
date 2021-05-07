@@ -19,4 +19,4 @@ ORDER BY
 	P.name_last
 WITH
 	time = 120
-	, maxrec = 100
+	, maxrec = 10000
