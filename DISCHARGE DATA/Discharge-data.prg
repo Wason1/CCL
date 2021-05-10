@@ -1,12 +1,9 @@
 select	; Recorded Clinical Notes	
 	UR_number = ea_URN.alias	
 	, patient_name = p.name_full_formatted ; "xxxx"	
-	, patient_id = ce.person_id
-;	, v500_event_code.event_cd
-;	, v500_event_code.event_cd_descr
+	, patient_id = ce.person_id	
 	, visit_no = ea_visit.alias	
-	, ce.encntr_id
-	, ce.event_cd	
+	, ce.encntr_id	
 	, result_type = evaluate(ce.event_class_cd	
 	, 223, "Date"	
 	, 224, "DOC (comment/report)"	
@@ -62,32 +59,27 @@ from
 	and ce_b.valid_from_dt_tm = ce.valid_from_dt_tm	
 	and ce_b.valid_until_dt_tm  = ce.valid_until_dt_tm	
 	)	
-	, (left join code_value cv_ec on cv_ec.code_value = ce.event_cd)
-;	, (left join v500_event_code on v500_event_code.event_cd = ce.event_cd)
+	, (left join code_value cv_ec on cv_ec.code_value = ce.event_cd)	
 		
 plan	ce	
 where	ce.view_level = 1	; only show events visible to endusers
 ;and	ce.valid_until_dt_tm > sysdate	; only show events that are still 'valid' (modified results show only the latest value as 'valid')
-;and	ce.event_cd  = 12345678	; enter event code here…
+and	ce.event_cd  = 2820588	; enter event code here…
 and	ce.event_cd in (select ese_es.event_cd	
 	from v500_event_set_code es_g2	
 	, v500_event_set_explode ese_es	
 	where es_g2.event_set_cd_disp = "ClinicalDoc"	
 	and ese_es.event_set_cd = es_g2.event_set_cd	
 	)	
-and	ce.event_end_dt_tm between cnvtdatetime("05-MAY-2021") and cnvtdatetime("10-MAY-2021")	; enter event dates here - optional
+and	ce.event_end_dt_tm between cnvtdatetime("04-MAY-2021") and cnvtdatetime("11-MAY-2021")	; enter event dates here
 join	p_ce	
 join	p	
 join	ea_URN	
-;where	ea_URN.alias = "123456"	; enter URN here… - optional
+;where	ea_URN.alias = "123456"	; enter URN here… (YOU MUST DO THIS)
 join	ea_visit	
 ;where	ea_visit.alias = "IPE123456"	; enter visit number here
 join	ce_b	
-join	cv_ec
-;join	v500_event_code
-
-where
-	dis
+join	cv_ec	
 		
 order by		
 	ce.event_end_dt_tm	
@@ -97,5 +89,6 @@ order by
 	, ce.clinical_event_id	; returns multiple rows if an event has been updated
 	, 0	
 		
-with	time = 10000
-	, maxrex=100
+with
+    time = 600
+    , maxrec = 20000

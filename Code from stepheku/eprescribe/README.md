@@ -1,6 +1,8 @@
 # ePrescribe queries
 These queries are related to ePrescribe, specifically with character limits sent to Surescripts
 
+Jason W - I got this code from here: https://github.com/stepheku/cclqueries
+
 
 ## Contents
 * [erx_order_sentence_display.sql](./erx_order_sentence_display.sql): This query will grab prescription order sentences and evaluate what the likely erx order sentence will be and the text length 
