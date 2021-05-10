@@ -17,4 +17,4 @@ JOIN
     PERSON
 WITH
     MAXREC=5
-    TIME=20
+    , TIME=20
