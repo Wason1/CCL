@@ -1,30 +1,27 @@
-select
-;Can I request a 1 off report on the number of IV cannula inserted in ED per day over the past 6 months
-;Sort into 3 ED’s
-;•	SH, FH, WTN
-org.org_name
-;,year = Year(ce.event_start_dt_tm)
-;,month = month(ce.event_start_dt_tm)
-;,day = day(ce.event_start_dt_tm)
-;,hour(ce.event_start_dt_tm)
-;,No_insert = count(*)
-;,enc_id = listagg(ce.ENCNTR_ID,"  ") over (order by null)
-,enct_code = uar_get_code_display(ecn.encntr_type_cd)
-,ECN.encntr_type_cd
-,ecn.organization_id
-,org.org_name
-,location_facility = uar_get_code_display(ecn.loc_facility_cd)
-,ea.alias
-,p.name_full_formatted
-,ce.ENCNTR_ID
-,startevent = format(ce.EVENT_START_DT_TM , "dd/mm/yy")
-;, endevent = format(ce.EVENT_END_DT_TM , "dd/mm/yy")
-,cdl.LABEL_NAME
-,Event_resul2 = Concat	(
-						trim(uar_get_code_display(ce.EVENT_CD))," ",
-						if ( ce.RESULT_VAL = ce.EVENT_TAG) ce.EVENT_TAG else concat(trim(ce.EVENT_TAG,5)," ", ce.RESULT_VAL) endif
-						)
- 
+SELECT
+    org.org_name
+    ;,year = Year(ce.event_start_dt_tm)
+    ;,month = month(ce.event_start_dt_tm)
+    ;,day = day(ce.event_start_dt_tm)
+    ;,hour(ce.event_start_dt_tm)
+    ;,No_insert = count(*)
+    ;,enc_id = listagg(ce.ENCNTR_ID,"  ") over (order by null)
+    ,enct_code = uar_get_code_display(ecn.encntr_type_cd)
+    ,ECN.encntr_type_cd
+    ,ecn.organization_id
+    ,org.org_name
+    ,location_facility = uar_get_code_display(ecn.loc_facility_cd)
+    ,ea.alias
+    ,p.name_full_formatted
+    ,ce.ENCNTR_ID
+    ,startevent = format(ce.EVENT_START_DT_TM , "dd/mm/yy")
+    ;, endevent = format(ce.EVENT_END_DT_TM , "dd/mm/yy")
+    ,cdl.LABEL_NAME
+    ,Event_resul2 = Concat	(
+                            trim(uar_get_code_display(ce.EVENT_CD))," ",
+                            if ( ce.RESULT_VAL = ce.EVENT_TAG) ce.EVENT_TAG else concat(trim(ce.EVENT_TAG,5)," ", ce.RESULT_VAL) endif
+                            )
+    
  from clinical_event CE
     ,(left join V500_EVENT_CODE ec on ce.EVENT_CD = ec.EVENT_CD)
     ,(left join CE_EVENT_ACTION cea on cea.event_id = ce.event_id)
@@ -37,16 +34,16 @@ org.org_name
     ,(	inner join person p on p.person_id = ce.person_id ;and p.person_id = 12630809
  	and p.ACTIVE_IND = 1 and p.NAME_LAST_KEY != "TESTWHS"
    )
-plan CE
-join ec
-join cea
-join cdl
-join dlt
-join dsr
-join ecn
-join ea
-join org
-join p
+PLAN CE
+JOIN EC
+JOIN CEA
+JOIN CDL
+JOIN DLT
+JOIN DSR
+JOIN ECN
+JOIN EA
+JOIN ORG
+JOIN P
 
 where
 ;    1=1
@@ -62,12 +59,12 @@ where
 	)
     and ce.event_start_dt_tm >= CNVTDATETIME("01-OCT-2020")
     and ce.event_start_dt_tm <= CNVTDATETIME("01-APR-2021")
-;and ce.ENCNTR_ID = 47281522
-;----------------
-;AND CE.RESULT_STATUS_CD != 31
-;AND CE.authentic_flag = 1
-;AND CE.CE_DYNAMIC_LABEL_ID > 0
-;AND CE.PUBLISH_FLAG = 1
-;group by org.org_name, year(ce.event_start_dt_tm), month(ce.event_start_dt_tm), day(ce.event_start_dt_tm)
+    ;and ce.ENCNTR_ID = 47281522
+    ;----------------
+    ;AND CE.RESULT_STATUS_CD != 31
+    ;AND CE.authentic_flag = 1
+    ;AND CE.CE_DYNAMIC_LABEL_ID > 0
+    ;AND CE.PUBLISH_FLAG = 1
+    ;group by org.org_name, year(ce.event_start_dt_tm), month(ce.event_start_dt_tm), day(ce.event_start_dt_tm)
 order by org.org_name, year(ce.event_start_dt_tm), month(ce.event_start_dt_tm), day(ce.event_start_dt_tm)
 with time = 600, maxrec = 100000
