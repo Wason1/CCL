@@ -1,22 +1,35 @@
 SELECT
-    P.name_first
-    , P.name_last
-    , P.username
+    UPDATE_TIME = FORMAT(P.UPDT_DT_TM, "YYYY-MM-DD HH:MM:SS")
+    , END_DATE = FORMAT(P.END_EFFECTIVE_DT_TM, "YYYY-MM-DD HH:MM:SS")
+    , P.USERNAME
+    , P.NAME_FIRST
+    , P.NAME_LAST
+    , P.ACTIVE_IND
     , E.DIRECTORY_IND
-    , END_DATE = format(P.end_effective_dt_tm, "YYYY-MM-DD")
+    , P.UPDT_ID
+    , P.UPDT_TASK
+    , P.UPDT_CNT
+    , P.PHYSICIAN_IND
+
 FROM
-    prsnl	P
-    , (LEFT JOIN ea_user	E ON E.username = P.username)
+    PRSNL	P
+    ,(
+        LEFT JOIN EA_USER E ON
+        E.USERNAME = P.USERNAME
+    )
+
 PLAN
 	P
-WHERE
-    ;Enter the user names you want to have a look at below.
-    P.username IN ("HOMERS8", "HOMERS9", "KARADUH", "WHITTLJ2")
+;WHERE
+    ;ENTER THE USER NAMES YOU WANT TO HAVE A LOOK AT BELOW.
+;    P.USERNAME IN ("HOMERS8", "HOMERS9", "KARADUH", "WHITTLJ2")
 
 JOIN
 	E
+
 ORDER BY
-	P.name_last
+	P.UPDT_DT_TM DESC
+
 WITH
-	time = 120
-	, maxrec = 10000
+	TIME = 10
+    , MAXREC=3000
