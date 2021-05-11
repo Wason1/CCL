@@ -61,7 +61,7 @@ where
 		or cnvtlower(ce.RESULT_VAL) like "**insert*"
 	)
     and ce.event_start_dt_tm >= CNVTDATETIME("01-OCT-2020")
-    and ce.event_start_dt_tm <= CNVTDATETIME("01-APR-2020")
+    and ce.event_start_dt_tm <= CNVTDATETIME("01-APR-2021")
 ;and ce.ENCNTR_ID = 47281522
 ;----------------
 ;AND CE.RESULT_STATUS_CD != 31
