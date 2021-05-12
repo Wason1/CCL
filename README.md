@@ -1,9 +1,9 @@
-# CCL-Audit-Queries
-a collection of CCL code used to check the database for issues
+# CCL-Queries
+a collection of CCL code used to extract data from the Cerner EMR (actually a DMR) system.
 
 [Markdown Guide](https://guides.github.com/features/mastering-markdown/)
 
-## CCL Queries
+## List of CCL Queries
 
 NAME OF CODE | DESCRIPTION OF CODE
 -------------|--------------------
