@@ -3,7 +3,7 @@ a collection of CCL code used to check the database for issues
 
 [Markdown Guide](https://guides.github.com/features/mastering-markdown/)
 
-## Index
+## CCL Queries
 
 NAME OF CODE | DESCRIPTION OF CODE
 -------------|--------------------
