@@ -1,5 +1,5 @@
 # CCL-Queries
-a collection of CCL code used to check the database for issues
+a collection of CCL code used to extract data from the Cerner EMR (actually a DMR) system.
 
 [Markdown Guide](https://guides.github.com/features/mastering-markdown/)
 
