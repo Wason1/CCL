@@ -1,9 +1,9 @@
-# CCL-Audit-Queries
+# CCL-Queries
 a collection of CCL code used to check the database for issues
 
 [Markdown Guide](https://guides.github.com/features/mastering-markdown/)
 
-## CCL Queries
+## List of CCL Queries
 
 NAME OF CODE | DESCRIPTION OF CODE
 -------------|--------------------
