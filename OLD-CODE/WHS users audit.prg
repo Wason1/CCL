@@ -109,5 +109,5 @@ order by
 	, 0	
 		
 with		
-	time = 60	
-	, maxrec = 1000	
+	time = 500	
+	;, maxrec = 10000	
