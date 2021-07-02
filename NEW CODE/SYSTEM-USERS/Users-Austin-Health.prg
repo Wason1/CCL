@@ -28,7 +28,7 @@ plan c
 where c.credential_id > 0 
 join p 
 where p.active_ind = 0
-and year(p.beg_effective_dt_tm) <= 2017
+and year(P.CREATE_DT_TM) <= 2017
 join por
 join o 
 join osor
@@ -44,6 +44,6 @@ where c.prsnl_id not in
 		where os.name = "Western Health"
 	)
  )
-order by c.beg_effective_dt_tm asc, c.prsnl_id
+order by P.CREATE_DT_TM, c.prsnl_id
 with ; maxrec = 5000, 
 time = 60
