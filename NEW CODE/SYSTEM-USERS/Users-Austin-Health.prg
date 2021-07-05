@@ -1,6 +1,7 @@
 select
 distinct
 credential_prsnl =  c.prsnl_id
+, P.CREATE_DT_TM
 , c.credential_id
 , c.credential_cd
 , Cred_name  	= uar_get_code_display(c.credential_cd)
