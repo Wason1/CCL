@@ -1,4 +1,4 @@
-select	; Patients created by 'WH_SCH'	;TEST COMMENT
+select	; Patients created by 'WH_SCH'	
 	p.person_id	
 	, p.name_first	
 	, p.name_middle	
