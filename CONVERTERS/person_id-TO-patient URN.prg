@@ -8,7 +8,7 @@ FROM
 PLAN P
 JOIN PA
 WHERE 
-	P.PERSON_ID = "XXXXXXX" ; Enter the person ID here
+	P.PERSON_ID = XXXXXXX ; Enter the person ID here
 	AND
    	PA.ALIAS_POOL_CD = 9569589.00 ; this filters for the UR Number
 
