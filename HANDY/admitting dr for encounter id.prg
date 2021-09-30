@@ -10,7 +10,6 @@ FROM
 	ENCNTR_PRSNL_RELTN   E
 
 WHERE
-;	E.PRSNL_PERSON_ID = 11656896
 	E.encntr_id = XXXXXXX ; Enter Encounter Id
 	AND
 	ENCNTR_PRSNL_R_CD = 1116 ; this filters for addmitting Dr
