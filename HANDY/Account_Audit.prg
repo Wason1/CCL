@@ -1,21 +1,21 @@
 select	; WHS users	that were created in the last 8 hours by the current user
 	p.name_last	
 	, p.name_first	
-	, p.name_full_formatted	
+	, p.name_full_formatted
+	, prsnl_active = p.active_ind
 	, physician_ind = p.physician_ind	
 	, p.username	
-	, postion = uar_get_code_display(p.position_cd)	
+	, postion = uar_get_code_display(p.position_cd)
+	, prsnl_beg_dt = format(p.beg_effective_dt_tm, "dd/mm/yyyy")	
+	, prsnl_end_dt = format(p.end_effective_dt_tm, "dd/mm/yyyy")	
 	, prsnl_create_dt = format(p.create_dt_tm, "dd/mm/yyyy")	
 	, prsnl_creator = if(p.person_id > 0 and p.create_prsnl_id = 0) "0"	
 	else p_p_create.name_full_formatted	
-	endif	
-	, prsnl_active = p.active_ind	
+	endif		
 	, prsnl_active_status_dt = format(p.active_status_dt_tm, "dd/mm/yyyy")	
 	, prsnl_active_status_updater = if(p.person_id > 0 and p.active_status_prsnl_id = 0) "0"	
 	else p_p_act_stat.name_full_formatted	
-	endif	
-	, prsnl_beg_dt = format(p.beg_effective_dt_tm, "dd/mm/yyyy")	
-	, prsnl_end_dt = format(p.end_effective_dt_tm, "dd/mm/yyyy")	
+	endif		
 	, prsnl_last_update = format(p.updt_dt_tm, "dd/mm/yy hh:mm:ss")	
 	, prsnl_last_updater = if(p.person_id > 0 and p.updt_id = 0) "0"	
 	else p_p.name_full_formatted	
@@ -256,12 +256,9 @@ join	p_activity
 		
 order by		
 ;	p.active_status_dt_tm	; use one of these switches as the first sort option
-	p.updt_dt_tm	; use one of these switches as the first sort option
-	, cnvtupper(p.name_full_formatted)	
-	, p.person_id	
-	, uar_get_code_display(cred.credential_cd)	
-	, 0	
+	p.updt_dt_tm desc	; use one of these switches as the first sort option
+	, p.name_last desc
 		
 with		
 	time = 120	
-	, maxrec = 100
+	, maxrec = 1000
